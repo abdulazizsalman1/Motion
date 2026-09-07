@@ -1,0 +1,1555 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Motion Demo</title>
+
+<style>
+:root{
+  --bg:#07100b;
+  --card:#101a14;
+  --soft:#18261d;
+  --green:#80ff3d;
+  --text:#fff;
+  --muted:#9fb2a4;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(180deg,#050a07,#0b160f);
+  color:white;
+  min-height:100vh;
+}
+
+button,input{
+  font:inherit;
+}
+
+.wrap{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-size:28px;
+}
+
+.mark{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:var(--green);
+  color:#07100b;
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+
+.card{
+  background:#101a14;
+  border:1px solid #23372a;
+  border-radius:22px;
+  padding:18px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:16px;
+}
+
+.span6{
+  grid-column:span 6;
+}
+
+.span12{
+  grid-column:span 12;
+}
+
+@media(max-width:800px){
+  .span6{
+    grid-column:span 12;
+  }
+
+  .wrap{
+    padding:14px;
+  }
+}
+
+h1,h2,h3{
+  margin:.2em 0 .6em;
+}
+
+p{
+  color:var(--muted);
+}
+
+label{
+  display:block;
+  margin:12px 0 6px;
+  color:#dbe8df;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid #2b4031;
+  background:#0a120d;
+  color:white;
+}
+
+.btn{
+  border:0;
+  border-radius:14px;
+  padding:13px 16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.primary{
+  background:var(--green);
+  color:#07100b;
+}
+
+.ghost{
+  background:#1b2a20;
+  color:white;
+  border:1px solid #2d4635;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.row > *{
+  flex:1;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.small{
+  font-size:13px;
+  color:var(--muted);
+}
+
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.nav button{
+  flex:0 0 auto;
+}
+
+.stat{
+  padding:16px;
+  border-radius:18px;
+  background:#0b140e;
+  border:1px solid #24382a;
+}
+
+.stat strong{
+  display:block;
+  font-size:26px;
+  color:var(--green);
+}
+
+.list{
+  display:grid;
+  gap:10px;
+}
+
+.item{
+  padding:14px;
+  border-radius:16px;
+  background:#0b140e;
+  border:1px solid #223529;
+}
+
+.item b{
+  display:block;
+}
+
+.badge{
+  display:inline-block;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#1f3425;
+  color:var(--green);
+  font-size:12px;
+  font-weight:800;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+th,td{
+  text-align:right;
+  padding:11px;
+  border-bottom:1px solid #26392c;
+  font-size:14px;
+}
+
+th{
+  color:var(--green);
+}
+
+.tablewrap{
+  overflow:auto;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%);
+  background:#121b15;
+  border:1px solid #2d4635;
+  padding:12px 18px;
+  border-radius:14px;
+  display:none;
+  z-index:20;
+}
+
+.hero{
+  padding:26px;
+}
+
+.hero h1{
+  font-size:42px;
+}
+
+.club{
+  background:#0c140f;
+  padding:18px;
+  border-radius:20px;
+  border:1px solid #2a4232;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand">
+      <div class="mark">M</div>
+      MOTION
+    </div>
+
+    <button id="logoutBtn" class="btn ghost hidden">
+      تسجيل خروج
+    </button>
+  </div>
+
+
+  <!-- LOGIN / REGISTER -->
+
+  <section id="authView">
+
+    <div class="grid">
+
+      <div class="card span6 hero">
+
+        <span class="badge">
+          Motion Demo
+        </span>
+
+        <h1>
+          حرّك يومك مع Motion
+        </h1>
+
+        <p>
+          احجز النوادي والحصص الرياضية من مكان واحد.
+        </p>
+
+        <div class="club">
+
+          <b>
+            حساب الأدمن التجريبي
+          </b>
+
+          <div class="small">
+            admin@motion.kw
+          </div>
+
+          <div class="small">
+            Password: admin123
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card span6">
+
+        <div class="row">
+
+          <button class="btn primary" id="showLogin">
+            Sign in
+          </button>
+
+          <button class="btn ghost" id="showRegister">
+            Create account
+          </button>
+
+        </div>
+
+
+        <div id="loginBox">
+
+          <h2>
+            تسجيل الدخول
+          </h2>
+
+          <label>
+            الإيميل
+          </label>
+
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="name@email.com"
+          />
+
+
+          <label>
+            الباسوورد
+          </label>
+
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="••••••••"
+          />
+
+
+          <button
+            id="loginBtn"
+            class="btn primary"
+            style="width:100%;margin-top:14px"
+          >
+            دخول
+          </button>
+
+        </div>
+
+
+        <div id="registerBox" class="hidden">
+
+          <h2>
+            حساب جديد
+          </h2>
+
+          <label>
+            الاسم
+          </label>
+
+          <input
+            id="regName"
+            placeholder="عبدالعزيز"
+          />
+
+
+          <label>
+            الإيميل
+          </label>
+
+          <input
+            id="regEmail"
+            type="email"
+            placeholder="name@email.com"
+          />
+
+
+          <label>
+            الباسوورد
+          </label>
+
+          <input
+            id="regPassword"
+            type="password"
+            placeholder="6 أحرف أو أكثر"
+          />
+
+
+          <button
+            id="registerBtn"
+            class="btn primary"
+            style="width:100%;margin-top:14px"
+          >
+            إنشاء الحساب
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- MAIN APP -->
+
+  <section id="appView" class="hidden">
+
+    <div class="nav">
+
+      <button
+        class="btn primary"
+        data-page="home"
+      >
+        الرئيسية
+      </button>
+
+      <button
+        class="btn ghost"
+        data-page="bookings"
+      >
+        حجوزاتي
+      </button>
+
+      <button
+        class="btn ghost"
+        data-page="profile"
+      >
+        حسابي
+      </button>
+
+      <button
+        id="adminNav"
+        class="btn ghost hidden"
+        data-page="admin"
+      >
+        Admin Database
+      </button>
+
+    </div>
+
+
+    <!-- HOME -->
+
+    <div id="home" class="page">
+
+      <div class="card hero">
+
+        <span class="badge">
+          Kuwait Fitness Marketplace
+        </span>
+
+        <h1 id="welcome">
+          هلا 👋
+        </h1>
+
+        <p>
+          اختر النادي والحصة واحجز مباشرة.
+        </p>
+
+      </div>
+
+
+      <div class="grid" style="margin-top:16px">
+
+
+        <div class="card span6">
+
+          <div class="club">
+
+            <span class="badge">
+              Boxing
+            </span>
+
+            <h2>
+              Motion Boxing Club
+            </h2>
+
+            <p>
+              السالمية
+              <br>
+              8:00 PM
+              <br>
+              10 د.ك
+            </p>
+
+            <button
+              class="btn primary bookBtn"
+              data-club="Motion Boxing Club"
+              data-class="Boxing Basics"
+              data-price="10"
+            >
+              احجز الآن
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="card span6">
+
+          <div class="club">
+
+            <span class="badge">
+              Strength
+            </span>
+
+            <h2>
+              Iron House
+            </h2>
+
+            <p>
+              حولي
+              <br>
+              7:00 PM
+              <br>
+              12 د.ك
+            </p>
+
+            <button
+              class="btn primary bookBtn"
+              data-club="Iron House"
+              data-class="Strength Session"
+              data-price="12"
+            >
+              احجز الآن
+            </button>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+    <!-- BOOKINGS -->
+
+    <div
+      id="bookings"
+      class="page hidden"
+    >
+
+      <div class="card">
+
+        <h2>
+          حجوزاتي
+        </h2>
+
+        <div
+          id="bookingList"
+          class="list"
+        >
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- PROFILE -->
+
+    <div
+      id="profile"
+      class="page hidden"
+    >
+
+      <div class="card">
+
+        <h2>
+          حسابي
+        </h2>
+
+        <div id="profileInfo">
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ADMIN -->
+
+    <div
+      id="admin"
+      class="page hidden"
+    >
+
+      <div class="grid">
+
+
+        <div class="stat span6">
+
+          <span>
+            Users
+          </span>
+
+          <strong id="usersCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="stat span6">
+
+          <span>
+            Bookings
+          </span>
+
+          <strong id="bookingsCount">
+            0
+          </strong>
+
+        </div>
+
+
+        <div class="card span12">
+
+          <h2>
+            Users Database
+          </h2>
+
+          <p class="small">
+            الباسوورد لا يظهر كنص مباشر.
+          </p>
+
+          <div class="tablewrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                  <th>Password Hash</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="usersTable">
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+        <div class="card span12">
+
+          <h2>
+            Bookings Database
+          </h2>
+
+          <div class="tablewrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+
+                  <th>ID</th>
+                  <th>User</th>
+                  <th>Club</th>
+                  <th>Class</th>
+                  <th>Price</th>
+                  <th>Status</th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="bookingsTable">
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+</div>
+
+
+<div id="toast" class="toast">
+</div>
+
+
+<script>
+
+const DBKEY = "motion_demo_db_v1";
+
+const SESSION = "motion_demo_session";
+
+let db = {
+  users: [],
+  bookings: []
+};
+
+
+
+function simpleHash(text){
+
+  let hash = 2166136261;
+
+  for(let i = 0; i < text.length; i++){
+
+    hash ^= text.charCodeAt(i);
+
+    hash = Math.imul(
+      hash,
+      16777619
+    );
+
+  }
+
+  return "demo$" +
+    (hash >>> 0)
+    .toString(16)
+    .padStart(8,"0");
+
+}
+
+
+
+function saveDB(){
+
+  localStorage.setItem(
+    DBKEY,
+    JSON.stringify(db)
+  );
+
+}
+
+
+
+function loadDB(){
+
+  const saved =
+    localStorage.getItem(DBKEY);
+
+  if(saved){
+
+    db = JSON.parse(saved);
+
+  }
+
+  else{
+
+    db = {
+
+      users: [
+
+        {
+          id: "U1000",
+          name: "Motion Admin",
+          email: "admin@motion.kw",
+          passwordHash:
+            simpleHash("admin123"),
+          role: "admin",
+          createdAt:
+            new Date().toISOString()
+        }
+
+      ],
+
+      bookings: []
+
+    };
+
+    saveDB();
+
+  }
+
+}
+
+
+
+function currentUser(){
+
+  const id =
+    localStorage.getItem(SESSION);
+
+  return db.users.find(
+    user => user.id === id
+  );
+
+}
+
+
+
+function toast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent = message;
+
+  toast.style.display = "block";
+
+  setTimeout(
+    () => {
+      toast.style.display = "none";
+    },
+    2000
+  );
+
+}
+
+
+
+function showAuth(){
+
+  document
+    .getElementById("authView")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("appView")
+    .classList.add("hidden");
+
+  document
+    .getElementById("logoutBtn")
+    .classList.add("hidden");
+
+}
+
+
+
+function showApp(){
+
+  const user =
+    currentUser();
+
+  if(!user){
+
+    showAuth();
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("authView")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("appView")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("logoutBtn")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("welcome")
+    .textContent =
+    "هلا " + user.name + " 👋";
+
+
+  document
+    .getElementById("adminNav")
+    .classList.toggle(
+      "hidden",
+      user.role !== "admin"
+    );
+
+
+  renderProfile();
+
+  renderBookings();
+
+  if(user.role === "admin"){
+
+    renderAdmin();
+
+  }
+
+}
+
+
+
+function page(id){
+
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      item =>
+      item.classList.add("hidden")
+    );
+
+
+  document
+    .getElementById(id)
+    .classList.remove("hidden");
+
+
+  document
+    .querySelectorAll(
+      ".nav button[data-page]"
+    )
+    .forEach(
+      button =>
+      button.className =
+      "btn ghost"
+    );
+
+
+  const selected =
+    document.querySelector(
+      `[data-page="${id}"]`
+    );
+
+
+  if(selected){
+
+    selected.className =
+      "btn primary";
+
+  }
+
+
+  if(id === "bookings"){
+
+    renderBookings();
+
+  }
+
+
+  if(id === "admin"){
+
+    renderAdmin();
+
+  }
+
+}
+
+
+
+document
+.getElementById("showLogin")
+.onclick = () => {
+
+  document
+    .getElementById("loginBox")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("registerBox")
+    .classList.add("hidden");
+
+};
+
+
+
+document
+.getElementById("showRegister")
+.onclick = () => {
+
+  document
+    .getElementById("registerBox")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+};
+
+
+
+document
+.getElementById("registerBtn")
+.onclick = () => {
+
+  const name =
+    document
+      .getElementById("regName")
+      .value
+      .trim();
+
+
+  const email =
+    document
+      .getElementById("regEmail")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const password =
+    document
+      .getElementById("regPassword")
+      .value;
+
+
+  if(
+    !name ||
+    !email ||
+    password.length < 6
+  ){
+
+    toast(
+      "تأكد من الاسم والإيميل والباسوورد"
+    );
+
+    return;
+
+  }
+
+
+  const emailExists =
+    db.users.some(
+      user =>
+      user.email === email
+    );
+
+
+  if(emailExists){
+
+    toast(
+      "الإيميل مسجل من قبل"
+    );
+
+    return;
+
+  }
+
+
+  const user = {
+
+    id:
+      "U" + Date.now(),
+
+    name: name,
+
+    email: email,
+
+    passwordHash:
+      simpleHash(password),
+
+    role: "user",
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+
+  db.users.push(user);
+
+  saveDB();
+
+
+  localStorage.setItem(
+    SESSION,
+    user.id
+  );
+
+
+  toast(
+    "تم إنشاء الحساب"
+  );
+
+
+  showApp();
+
+};
+
+
+
+document
+.getElementById("loginBtn")
+.onclick = () => {
+
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+
+  const user =
+    db.users.find(
+
+      user =>
+
+      user.email === email &&
+
+      user.passwordHash ===
+      simpleHash(password)
+
+    );
+
+
+  if(!user){
+
+    toast(
+      "الإيميل أو الباسوورد غير صحيح"
+    );
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+    SESSION,
+    user.id
+  );
+
+
+  toast(
+    "تم تسجيل الدخول"
+  );
+
+
+  showApp();
+
+};
+
+
+
+document
+.getElementById("logoutBtn")
+.onclick = () => {
+
+  localStorage.removeItem(
+    SESSION
+  );
+
+  showAuth();
+
+};
+
+
+
+document
+.querySelectorAll(
+  ".nav button[data-page]"
+)
+.forEach(
+
+  button => {
+
+    button.onclick = () => {
+
+      page(
+        button.dataset.page
+      );
+
+    };
+
+  }
+
+);
+
+
+
+document
+.querySelectorAll(".bookBtn")
+.forEach(
+
+  button => {
+
+    button.onclick = () => {
+
+      const user =
+        currentUser();
+
+
+      if(!user){
+
+        return;
+
+      }
+
+
+      const booking = {
+
+        id:
+          "B" + Date.now(),
+
+        userId:
+          user.id,
+
+        userEmail:
+          user.email,
+
+        club:
+          button.dataset.club,
+
+        className:
+          button.dataset.class,
+
+        price:
+          Number(
+            button.dataset.price
+          ),
+
+        status:
+          "PAID (DEMO)",
+
+        createdAt:
+          new Date()
+          .toISOString()
+
+      };
+
+
+      db.bookings.push(
+        booking
+      );
+
+
+      saveDB();
+
+
+      toast(
+        "تم الحجز والدفع التجريبي ✅"
+      );
+
+
+      page(
+        "bookings"
+      );
+
+    };
+
+  }
+
+);
+
+
+
+function renderBookings(){
+
+  const user =
+    currentUser();
+
+
+  if(!user){
+
+    return;
+
+  }
+
+
+  const bookings =
+    db.bookings.filter(
+
+      booking =>
+
+      booking.userId ===
+      user.id
+
+    );
+
+
+  const list =
+    document
+    .getElementById(
+      "bookingList"
+    );
+
+
+  if(bookings.length === 0){
+
+    list.innerHTML =
+      "<p>ما عندك حجوزات إلى الآن.</p>";
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    bookings.map(
+
+      booking => `
+
+      <div class="item">
+
+        <b>
+          ${booking.className}
+        </b>
+
+        <div>
+          ${booking.club}
+        </div>
+
+        <div class="small">
+
+          ${booking.price}
+          د.ك
+
+          •
+
+          ${booking.status}
+
+        </div>
+
+      </div>
+
+      `
+
+    ).join("");
+
+}
+
+
+
+function renderProfile(){
+
+  const user =
+    currentUser();
+
+
+  if(!user){
+
+    return;
+
+  }
+
+
+  document
+  .getElementById(
+    "profileInfo"
+  )
+  .innerHTML = `
+
+  <div class="item">
+
+    <b>
+      ${user.name}
+    </b>
+
+    <div>
+      ${user.email}
+    </div>
+
+    <div class="small">
+
+      User ID:
+      ${user.id}
+
+      <br>
+
+      Role:
+      ${user.role}
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+
+function renderAdmin(){
+
+  const user =
+    currentUser();
+
+
+  if(
+    !user ||
+    user.role !== "admin"
+  ){
+
+    page("home");
+
+    return;
+
+  }
+
+
+  document
+  .getElementById(
+    "usersCount"
+  )
+  .textContent =
+  db.users.length;
+
+
+  document
+  .getElementById(
+    "bookingsCount"
+  )
+  .textContent =
+  db.bookings.length;
+
+
+
+  document
+  .getElementById(
+    "usersTable"
+  )
+  .innerHTML =
+
+  db.users.map(
+
+    user => `
+
+    <tr>
+
+      <td>
+        ${user.id}
+      </td>
+
+      <td>
+        ${user.name}
+      </td>
+
+      <td>
+        ${user.email}
+      </td>
+
+      <td>
+        ${user.role}
+      </td>
+
+      <td>
+        ${user.passwordHash}
+      </td>
+
+    </tr>
+
+    `
+
+  ).join("");
+
+
+
+  document
+  .getElementById(
+    "bookingsTable"
+  )
+  .innerHTML =
+
+  db.bookings.map(
+
+    booking => `
+
+    <tr>
+
+      <td>
+        ${booking.id}
+      </td>
+
+      <td>
+        ${booking.userEmail}
+      </td>
+
+      <td>
+        ${booking.club}
+      </td>
+
+      <td>
+        ${booking.className}
+      </td>
+
+      <td>
+        ${booking.price}
+        KWD
+      </td>
+
+      <td>
+        ${booking.status}
+      </td>
+
+    </tr>
+
+    `
+
+  ).join("");
+
+}
+
+
+
+loadDB();
+
+
+if(currentUser()){
+
+  showApp();
+
+}
+
+else{
+
+  showAuth();
+
+}
+
+</script>
+
+</body>
+</html>
